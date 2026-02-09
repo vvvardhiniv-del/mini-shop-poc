@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Search Products</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header>
+  <h1>Search</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="cart.html">Cart</a>
+  </nav>
+</header>
+
+<div class="container">
+  <div class="card">
+    <input
+      id="searchInput"
+      class="search-input"
+      placeholder="Search products..."
+    />
+    <ul id="searchResults"></ul>
+  </div>
+</div>
+
+<script type="module">
+  import { products } from "./js/data.js";
+
+  const input = document.getElementById("searchInput");
+  const results = document.getElementById("searchResults");
+
+  input.addEventListener("input", () => {
+    results.innerHTML = "";
+    const value = input.value.toLowerCase();
+
+    products
+      .filter(p => p.name.toLowerCase().includes(value))
+      .forEach(p => {
+        const li = document.createElement("li");
+        li.textContent = `${p.name} - ₹${p.price}`;
+        results.appendChild(li);
+      });
+  });
+</script>
+
+</body>
+</html>
